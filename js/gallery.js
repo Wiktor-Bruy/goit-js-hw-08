@@ -92,7 +92,21 @@ list.append(...gallery);
 list.addEventListener('click', event => {
   if (event.target.nodeName === 'IMG') {
     event.preventDefault();
+
     const elem = event.target;
-    console.log(elem.getAttribute('data-source'));
+    const imgFull = document.createElement('img');
+    const src = elem.dataset.source;
+    const alt = elem.alt;
+    imgFull.setAttribute('src', src);
+    imgFull.setAttribute('alt', alt);
+
+    const div = document.createElement('div');
+    div.append(imgFull);
+    const strImg = div.innerHTML;
+
+    const modal = basicLightbox.create(strImg);
+    modal.show();
+  } else {
+    return;
   }
 });
